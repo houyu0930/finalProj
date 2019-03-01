@@ -1,0 +1,23 @@
+{% extends "index.html" %}
+{% block response %}
+<center>
+    <p><h3> Something I want to tell you ...</h3> </br>
+    {% for item in result %}
+        {% if item == 'fear' %}
+	<h4> Don't be afraid. </h4>
+        {% elif item == 'sadness' %}
+        <h4> Don't be sad. </h4>
+        {% elif item == 'anger' %}
+	<h4> Don't be angry. </h4>
+        {% elif item == 'love' %}
+        <h4> Enjoy the love. </h4>
+        {% elif item == 'surprise' %}
+        <h4> Be rational about the surprise in life. </h4>
+        {% else %}
+        <h4> Enjoy the joy. </h4>
+        {% endif %}
+    {% endfor %}
+    <h4> ... ... </h4>
+    </p>
+</center>
+{% endblock %}

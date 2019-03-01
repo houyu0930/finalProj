@@ -1,0 +1,26 @@
+{% extends "main.html" %}
+{% block content %}
+    <form>    
+        <center>
+        <p> </br></br> <h2>Hi, here is Alita.</h2> <h2>Something I want to tell you ...</h2> </br>
+            {% for item in result %}
+                {% if item == 'fear' %}
+                    <h4> Don't be afraid. </h4>
+                {% elif item == 'sadness' %}
+                    <h4> Don't be sad. </h4>
+                {% elif item == 'anger' %}
+                    <h4> Don't be angry. </h4>
+                {% elif item == 'love' %}
+                    <h4> Enjoy the love. </h4>
+                {% elif item == 'surprise' %}
+                    <h4> Be rational about the surprise in life. </h4>
+                {% else %}
+                    <h4> Enjoy the joy. </h4>
+                {% endif %}
+            {% endfor %}
+                <h4> ... ... </h4>
+        </p> </br>
+        <input type ="button" onclick="history.back()" value="return"></input>
+        </center>
+    </form>
+{% endblock %}
