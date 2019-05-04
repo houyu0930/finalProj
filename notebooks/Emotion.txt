@@ -1,8 +1,0 @@
-'fear': 0, 'sadness': 1, 'anger': 2, 'love': 3, 'surprise': 4, 'joy': 5
-
-0: Don't be afraid.
-1: Don't be sad.
-2: Don't be angry.
-3: Enjoy the love.
-4: Be rational about the surprise in life.
-5: Enjoy the joy.
