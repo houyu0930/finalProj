@@ -3,7 +3,7 @@ import numpy
 import errno
 import pickle
 
-from tqdm import tqdm
+# from tqdm import tqdm
 from torch.utils.data import DataLoader
 
 from lib import config
@@ -118,6 +118,14 @@ def twitter_preprocess():
     return preprocess
 '''
 
+'''
+    datasets = {
+        "train": (X_train, y_train),
+        "dev": (X_dev, y_dev),
+        "test": (X_test, y_test),
+    }    
+'''
+
 def load_datasets(datasets, train_batch_size, eval_batch_size, token_type,
                   preprocessor=None, params=None, word2idx=None):
     name = params   # e.g. EmotionClassification_dev
@@ -131,9 +139,9 @@ def load_datasets(datasets, train_batch_size, eval_batch_size, token_type,
             preprocessor = twitter_preprocess()
         '''
         print("Building word-level datasets...")
-        for type, Xy_data in datasets.items():
+        for type, Xy_data in datasets.items():  # train, test, dev
             _name = "{}_{}".format(name, type)
-            dataset = WordDataset(Xy_data[0], Xy_data[1], word2idx, name=_name,
+            dataset = WordDataset(Xy_data[0], Xy_data[1], word2idx, name=_name,     # Xy_data[0] = tweet; Xy_data[1] = labels
                                   preprocess=preprocessor)
             batch_size = train_batch_size if type == "train" else eval_batch_size
             loaders[type] = DataLoader(dataset, batch_size, shuffle=True,
@@ -143,3 +151,41 @@ def load_datasets(datasets, train_batch_size, eval_batch_size, token_type,
 
     return loaders
 
+def load_movies(data_path):
+    # 1, The Sound of Music, 1965, https://www.imdb.com/title/tt0059742/, A woman leaves an Austrian convent to become a governess to the children of a Naval officer widower. 
+    results = {1:[], 2:[], 3:[], 4:[], 5:[], 6:[]}
+    with open(data_path, 'r') as fin:
+        for line in fin.readlines():
+            items = line[:len(line)-1].split(',')
+            label = int(items[0])
+            movie = []
+            name = items[1].strip()
+            year = items[2].strip()
+            web = items[3].strip()
+            des = ','.join(items[4:]).strip()
+            movie.append(name)
+            movie.append(year)
+            movie.append(web)
+            movie.append(des)
+            results[label].append(movie)
+    return results
+
+ 
+def load_music(data_path):
+    # 6, You Are The Right One, Sports, You Are The Right One, https://music.163.com/#/song?id=553534022 
+    results = {1:[], 2:[], 3:[], 4:[], 5:[], 6:[]}
+    with open(data_path, 'r') as fin:
+        for line in fin.readlines():
+            items = line[:len(line)-1].split(',')
+            label = int(items[0])
+            song = []
+            name = items[1].strip()
+            singer = items[2].strip()
+            album = items[3].strip()
+            web = items[4].strip()
+            song.append(name)
+            song.append(singer)
+            song.append(album)
+            song.append(web)
+            results[label].append(song)
+    return results

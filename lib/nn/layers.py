@@ -96,8 +96,16 @@ class RNNEncoder(nn.Module):
     @staticmethod
     def last_by_index(outputs, lengths):
         # Index of the last output for each sequence.
+        # print(lengths)
+        # torch.Size([4, 4])
+        # >>> y = x.view(16)
+        # >>> y.size()
+        # torch.Size([16])
         idx = (lengths - 1).view(-1, 1).expand(outputs.size(0),
-                                               outputs.size(2)).unsqueeze(1)
+                                               outputs.size(2)).unsqueeze(1)    # unsqueeze D1 *1
+        # print('idx')
+        # print(idx)
+        # print(outputs.gather(1, idx).squeeze())
         # torch.gather(dim, index, out=None) → Tensor
         return outputs.gather(1, idx).squeeze()
 
@@ -111,8 +119,29 @@ class RNNEncoder(nn.Module):
     def last_timestep(self, outputs, lengths, bi=False):
         if bi:
             forward, backward = self.split_directions(outputs)
+            # tensor([[[-0.0050,  0.0346, -0.0540,  ...,  0.2081,  0.0078, -0.3285],
+            #          [ 0.0382,  0.0580, -0.0032,  ...,  0.3200,  0.0821, -0.4469],
+            #          [ 0.0598,  0.1161,  0.0144,  ...,  0.4412,  0.0225, -0.4357],
+            #          ...,
+            #          [ 0.0147,  0.0658,  0.0158,  ...,  0.4789,  0.0061, -0.4225],
+            #          [ 0.0247,  0.0505,  0.0365,  ...,  0.3581,  0.0228, -0.2056],
+            #          [ 0.0867,  0.1089, -0.2493,  ...,  0.5207,  0.0136, -0.2245]]],
+            #        device='cuda:0', grad_fn=<SliceBackward>)
+            # torch.Size([1, 16, 250])
+            # print(forward)
+            # print(forward.size())
+
+            # print(backward)
+            # print(backward.size())
             last_forward = self.last_by_index(forward, lengths)
-            last_backward = backward[:, 0, :]
+            if len(last_forward.size()) == 1:
+                last_forward = last_forward.unsqueeze(0)
+            last_backward = backward[:, 0, :]   # 1*1*250
+            # print("last forward and backward demension")
+            # print(last_forward)
+            # print(last_forward.size())
+            # print(last_backward)
+            # print(last_backward.size())
             return torch.cat((last_forward, last_backward), dim=-1)
 
         else:
@@ -120,6 +149,9 @@ class RNNEncoder(nn.Module):
 
     def forward(self, embs, lengths):
         # pack the batch
+        # print(embs.size()) # torch.Size([1, 85, 310])
+        # print(lengths.size())
+
         packed = pack_padded_sequence(embs, list(lengths.data),
                                       batch_first=True)
         out_packed, _ = self.rnn(packed)

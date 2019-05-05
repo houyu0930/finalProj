@@ -24,7 +24,7 @@ class ModelHelper:
         """
         batch_size = lengths.size(0)
 
-        sorted_lengths, sorted_idx = lengths.sort()
+        sorted_lengths, sorted_idx = lengths.sort() # sort(dim=-1, descending=False) -> (Tensor, LongTensor)
         _, original_idx = sorted_idx.sort(0, descending=True)
         # torch.linspace(start, end, steps=100, out=None) → Tensor => long Tensor
         reverse_idx = torch.linspace(batch_size - 1, 0, batch_size).long()
@@ -167,16 +167,20 @@ class ModelWrapper(nn.Module, ModelHelper):
         Returns: the logits for each class
 
         """
-        # sort
-        lengths, sort, unsort = self._sort_by(lengths)
-        x = sort(x)
+        # print(lengths.size()) torch.Size([1])
+        # print(lengths.size(0)) 1
+        if lengths.size(0) > 1:
+            # sort
+            lengths, sort, unsort = self._sort_by(lengths)
+            x = sort(x)
 
         representations, attentions = self.feature_extractor(x, lengths)
 
-        # unsort
-        representations = unsort(representations)
-        if attentions is not None:
-            attentions = unsort(attentions)
+        if lengths.size(0) > 1:
+            # unsort
+            representations = unsort(representations)
+            if attentions is not None:
+                attentions = unsort(attentions)
 
         logits = self.linear(representations)
         # modules = []

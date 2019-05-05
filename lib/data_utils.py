@@ -81,6 +81,8 @@ class BaseDataset(Dataset):
             self.max_length = max([len(x) for x in self.data])
         else:
             self.max_length = max_length
+        print('max length (words)')
+        print(self.max_length)
 
     def dataset_statistics(self):
         raise NotImplementedError
@@ -162,6 +164,7 @@ class WordDataset(BaseDataset):
                   "joy":0, "love":0, "optimism":0, "pessimism":0, "sadness":0,
                   "surprise":0, "trust":0, "neutral":0}
         for label in self.labels:
+            # print(label)
             label_counts["anger"] += label[0]
             label_counts["anticipation"] += label[1]
             label_counts["disgust"] += label[2]
@@ -176,6 +179,7 @@ class WordDataset(BaseDataset):
             if (label[0] + label[1] + label[2] + label[3] + label[4] + label[5] + label[6]
                     + label[7] + label[8] + label[9] + label[10]) == 0:
                 label_counts["neutral"] += 1
+            # break
 
         label_percent = {}
         label_list = ["anger", "anticipation", "disgust", "fear", "joy",
@@ -219,10 +223,12 @@ class WordDataset(BaseDataset):
         # in order to feed them to the model
         sample = vectorize(sample, self.word2idx, self.max_length)
 
+        '''
         if self.label_transformer is not None:
-            label = self.label_transformer.transform(label)
-
+            label = self.label_transformer.transform(label)       
+        '''
         if isinstance(label, (list, tuple)):
             label = numpy.array(label)
+
 
         return sample, label, len(self.data[index]), index

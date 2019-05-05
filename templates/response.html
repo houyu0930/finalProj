@@ -1,0 +1,151 @@
+{% extends "index.html" %}
+
+{% block emotion %}
+	<section class="panel spotlight medium right" id="first">
+		<div class="content span-7">
+			<h1 class="major">Emotions</h1>
+			<p>
+				<strong>
+					Emm, I think you may have these feelings?
+				</strong> </br>
+				<h3>
+                {% for item in emotions %}
+                    {% if item == 'Anger' %}
+                        Anger </br>
+                    {% elif item == 'Anticipation' %}
+                        Anticipation </br>
+                    {% elif item == 'Disgust' %}
+                        Disgust </br>
+                    {% elif item == 'Fear' %}
+                        Fear </br>
+                    {% elif item == 'Joy' %}
+                        Joy </br>
+                    {% elif item == 'Love' %}
+                        Love </br>
+                    {% elif item == 'Optimism' %}
+                        Optimism </br>
+                    {% elif item == 'Pessimism' %}
+                        Pessimism </br>
+                    {% elif item == 'Sadness' %}
+                        Sadness </br>
+                    {% elif item == 'Trust' %}
+                        Trust </br>
+                    {% elif item == 'Neutral' %}
+                        Neutral </br>
+                    {% elif item == 'Surprise' %}
+                        Surprise </br>
+                    {% endif %}
+                {% endfor %}
+				</h3>>
+			</p>
+		</div>
+		<div class="image filtered tinted" data-position="top left">
+			<img src="/static/images/03Emotion.jpg" alt="" />
+		</div>
+	</section>
+{% endblock %}
+
+{% block movies %}
+	<section class="panel spotlight medium right" id="second">
+		<div class="content span-7">
+			<h1 class="major">Some Movies</h1>
+			<p><strong>
+				{% for movie in movies %}
+                    {% if movie[0] == 'The Sound of Music' %}
+                        <a href="https://www.imdb.com/title/tt0059742/">The Sound of Music</a>(1965) </br>
+                        A woman leaves an Austrian convent to become a governess to the children of a Naval officer widower. </br>
+                    {% elif movie[0] == 'Frozen' %}
+                        <a href="https://www.imdb.com/title/tt2294629/">Frozen</a>(2013) </br>
+                        When the newly-crowned Queen Elsa accidentally uses her power to turn things into ice to curse her home in infinite winter, her sister Anna teams up with a mountain man, his playful reindeer, and a snowman to change the weather condition. </br>
+                    {% elif movie[0] == 'Flipped' %}
+                        <a href="http://www.imdb.com/title/tt0817177">Flipped</a>(2010) </br>
+                        Two eighth-graders start to have feelings for each other despite being total opposites. </br>
+                    {% elif movie[0] == 'La La Land' %}
+                        <a href="https://www.imdb.com/title/tt3783958/">La La Land</a>(2016) </br>
+                        While navigating their careers in Los Angeles, a pianist and an actress fall in love while attempting to reconcile their aspirations for the future. </br>
+                    {% elif movie[0] == 'Dreamgirls' %}
+                        <a href="https://www.imdb.com/title/tt0443489/">Dreamgirls</a>(2006) </br>
+                        A trio of black female soul singers cross over to the pop charts in the early 1960s, facing their own personal struggles along the way. </br>                    
+                    {% elif movie[0] == 'The Lion King' %}
+                        <a href="https://www.imdb.com/title/tt0110357/">The Lion King</a>(1994) </br>
+                        A Lion cub crown prince is tricked by a treacherous uncle into thinking he caused his father's death and flees into exile in despair, only to learn in adulthood his identity and his responsibilities. </br>
+                    {% elif movie[0] == 'Perhaps Love' %}
+                        <a href="https://www.imdb.com/title/tt0454914/">Perhaps Love</a>(2005) </br>
+                        A love triangle develops during the making of a musical in mainland China. </br>
+                    {% elif movie[0] == 'Polina danser sa vie' %}
+                        <a href="https://www.imdb.com/title/tt4383288/">Polina, danser sa vie</a>(2016) </br>
+                        A young girl studies classical ballet. As a young woman she turns to modern dance and choreography. </br>
+                    {% elif movie[0] == 'Devdas' %}
+                        <a href="https://www.imdb.com/title/tt0238936/">Devdas</a>(2002) </br>
+                        After his wealthy family prohibits him from marrying the woman he is in love with, Devdas Mukherjee's life spirals further and further out of control as he takes up alcohol and a life of vice to numb the pain. </br>
+                    {% elif movie[0] == 'The Brave Hearted Will Take Away the Bride' %}
+                        <a href="https://www.imdb.com/title/tt0112870/">The Brave Hearted Will Take Away the Bride</a>(1995) </br>
+                        When Raj meets Simran in Europe, it isn't love at first sight but when Simran moves to India for an arranged marriage, love makes its presence felt. </br>
+                    {% elif movie[0] == 'Sunny' %}
+                        <a href="https://www.imdb.com/title/tt0059742/">Sunny</a>(2011) </br>
+                        Seven girls become good friends in high school, then events pull them apart for 25 years. When one of the friends lies dying in a hospital, she wishes to see each of them one last time. </br>
+                    {% elif movie[0] == '3 Idiots' %}
+                        <a href="https://www.imdb.com/title/tt1187043/">3 Idiots</a>(2009) </br>
+                        Two friends are searching for their long lost companion. They revisit their college days and recall the memories of their friend who inspired them to think differently, even as the rest of the world called them "idiots". </br>
+                    {% endif %}
+                {% endfor %}
+			</strong></p>
+		</div>
+		<div class="image filtered tinted" data-position="top left">
+			<img src="/static/images/01Movies.jpg" alt="" />
+		</div>
+	</section>
+{% endblock %}
+
+{% block music %}
+	<section class="panel spotlight medium right" id="third">
+		<div class="content span-7">
+			<h1 class="major">Some Music</h1>
+			<p><strong>
+                {% for song in songs %}
+                    {% if song[0] == 'You' %}
+                        <a href="https://music.163.com/#/song?id=3932159">You</a>(Approaching Nirvana) </br>
+                    {% elif song[0] == 'Inspire' %}
+                        <a href="https://music.163.com/#/song?id=16846091">Inspire</a>(Capo Productions) </br>
+                    {% elif song[0] == 'Touch The Sky' %}
+                        <a href="https://music.163.com/#/song?id=552145020 ">Touch The Sky</a>(Cedric Gervais / Dallas Austin / Digital Farm Animals) </br>
+                    {% elif song[0] == 'Chiru (Saisei no Uta)' %}
+                        <a href="https://muhttps://music.163.com/#/song?id=496549">Chiru (Saisei no Uta)</a>(Robert de Boron) </br>
+                     {% elif song[0] == 'Rain' %}
+                        <a href="https://music.163.com/#/song?id=429769986">Rain</a>(Engvall) </br>
+                    {% elif song[0] == ' River Flows In You' %}
+                        <a href="https://music.163.com/#/song?id=5086081"> River Flows In You</a>(Mark Pride) </br>
+                    {% elif song[0] == 'A Thousand Years' %}
+                        <a href="https://music.163.com/#/song?id=1939032">A Thousand Years</a>(Christina Perri) </br>
+                    {% elif song[0] == 'Let It Be Me' %}
+                        <a href="https://music.163.com/#/song?id=5039981">Let It Be Me</a>(Phil Everly) </br>
+                    {% elif song[0] == 'My Love' %}
+                        <a href="https://music.163.com/#/song?id=5040138 ">My Love</a>(Sia) </br>                                                  
+                    {% elif song[0] == 'Small Stream' %}
+                        <a href="https://music.163.com/#/song?id=853692 ">Small Stream</a>(The Nature Sounds Society Japan) </br>
+                    {% elif song[0] == 'Gentle Ocean Waves' %}
+                        <a href="https://music.163.com/#/song?id=853702">Gentle Ocean Waves</a>(The Nature Sounds Society Japan) </br>              
+                    {% elif song[0] == 'Songbirds' %}
+                        <a href="https://music.163.com/#/song?id=4054401">Songbirds</a>(Echoes of Nature) </br>
+                    {% elif song[0] == 'Our Conversations' %}
+                        <a href="https://music.163.com/#/song?id=28470912">Our Conversations</a>(Lay Low) </br>
+                    {% elif song[0] == 'Like a girl' %}
+                        <a href="https://music.163.com/#/song?id=1301622">Like a girl</a>(Egil Olsen) </br>
+                    {% elif song[0] == 'Lost Watch' %}
+                        <a href="https://music.163.com/#/song?id=4281830">Lost Watch</a>(Seabear) </br>
+                    {% elif song[0] == 'Breath and Life' %}
+                        <a href="https://music.163.com/#/song?id=3935139">Breath and Life</a>(Audio Machine) </br>
+                    {% elif song[0] == 'Video Love' %}
+                        <a href="https://music.163.com/#/song?id=26462797">Video Love</a>(Suburban Living) </br>
+                    {% elif song[0] == 'You Are The Right One' %}
+                        <a href="https://music.163.com/#/song?id=553534022 ">You Are The Right One</a>(Sports) </br>
+                    {% endif %}
+                {% endfor %}
+            </strong></p>
+            </strong></p>
+		</div>
+		<div class="image filtered tinted" data-position="top left">
+			<img src="/static/images/02Music.jpg" alt="" />
+		</div>
+	</section>
+{% endblock %}

@@ -5,7 +5,7 @@ import time
 import sys
 import numpy
 import pickle
-import collections
+# import collections
 
 import torch
 from torch.nn.utils import clip_grad_norm_
@@ -15,6 +15,7 @@ from lib.visdom_tools import Experiment, Metric
 
 
 def epoch_progress(loss, epoch, batch, batch_size, dataset_size):
+    # print(batch)    # idx_batch 6839/32
     count = batch * batch_size
     bar_len = 40
     filled_len = int(round(bar_len * count / float(dataset_size)))
@@ -35,6 +36,8 @@ def _get_predictions(posteriors, task):
     """
 
     if task == "mclf":
+        # sign: < 0 => -1, > 0 => 1, = 0 => 0
+        # clip: < a_min => = a_min
         predicted = numpy.clip(numpy.sign(posteriors), a_min=0,
                                a_max=None)
     else:
@@ -66,7 +69,9 @@ def predict(model, pipeline, dataloader, task, mode="eval"):
     attentions = []
     total_loss = 0
 
-    for i_batch, sample_batched in enumerate(dataloader, 1):
+    # flag = 0
+
+    for i_batch, sample_batched in enumerate(dataloader, 1):    # enumerate(sequence, [start=0])
         outputs, labels, atts, loss = pipeline(model, sample_batched)
 
         if loss is not None:
@@ -76,11 +81,20 @@ def predict(model, pipeline, dataloader, task, mode="eval"):
         posts = outputs.data.cpu().numpy()
 
         # get the actual predictions (classes and so on...)
+        '''
+        if flag == 0:
+            print("post shape") # 2
+            print(len(posts.shape))
+            flag = 1
         if len(posts.shape) == 1:
             predicted = _get_predictions(numpy.expand_dims(posts, axis=0),
                                          task)
         else:
             predicted = _get_predictions(posts, task)
+        
+        '''
+
+        predicted = _get_predictions(posts, task)
 
         # to numpy
         labels = labels.data.cpu().numpy().squeeze().tolist()
@@ -89,12 +103,15 @@ def predict(model, pipeline, dataloader, task, mode="eval"):
         if atts is not None:
             atts = atts.data.cpu().numpy().squeeze().tolist()
 
+        '''
         if not isinstance(labels, collections.Iterable):
+            print('not isinstance(labels, collections.Iterable)')
             labels = [labels]
             predicted = [predicted]
             posts = [posts]
             if atts is not None:
-                atts = [atts]
+                atts = [atts]        
+        '''
 
         '''
         # make transformations to the predictions
@@ -385,9 +402,12 @@ class Trainer:
 
         running_loss = 0.0
         for i_batch, sample_batched in enumerate(loader, 1):
+            # print(i_batch)
             # 1 - zero the gradients
             self.optimizer.zero_grad()
             # 2 - compute loss using the provided pipeline
+            # print(type(sample_batched))
+            # print(numpy.shape(sample_batched))
             outputs, labels, attentions, loss = self.pipeline(self.model,
                                                               sample_batched)
             # 3 - backward pass
@@ -442,7 +462,6 @@ class Trainer:
         """
         Evaluate the model on each dataset and update the corresponding metrics.
         The function is normally called at the end of each epoch.
-        Returns:
 
         """
 
@@ -497,6 +516,7 @@ class Trainer:
         except:
             data = []
 
+        # adding experiment results
         data.append(results)
 
         with open(json_file, 'w') as f:

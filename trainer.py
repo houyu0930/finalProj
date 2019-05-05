@@ -120,7 +120,14 @@ def define_trainer(task,
         word2idx, idx2word, embeddings = load_embeddings(_config)
 
     # Constructing the pytorch datasets
-    loaders = load_datasets(datasets,
+    '''
+    datasets = {
+        "train": (X_train, y_train),
+        "dev": (X_dev, y_dev),
+        "test": (X_test, y_test),
+    }    
+    '''
+    loaders = load_datasets(datasets,                               # DataLoader
                             train_batch_size=_config["batch_train"],
                             eval_batch_size=_config["batch_eval"],
                             token_type=_config["token_type"],
@@ -144,7 +151,7 @@ def define_trainer(task,
 
     # Loss function and optimizer
     if task == "mclf":
-        loss_func = torch.nn.MultiLabelSoftMarginLoss()
+        loss_func = torch.nn.MultiLabelSoftMarginLoss() # same as sigmoid + BCE
         # loss_func = torch.nn.BCEWithLogitsLoss()
     else:
         raise ValueError("Invalid task!")
