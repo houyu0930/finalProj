@@ -31,7 +31,7 @@ MODEL_EC = {
     "embed_noise": 0.2,
     "embed_dropout": 0.1,
     "encoder_dropout": 0.3,
-    "encoder_size": 150,
+    "encoder_size": 250,
     "encoder_layers": 2,
     "encoder_bidirectional": True,
     "attention": True,
@@ -40,6 +40,6 @@ MODEL_EC = {
     "attention_dropout": 0.3,
     "base": 0.56,
     "patience": 20,
-    "weight_decay": 0.0,
+    "weight_decay": 0.0001,
     "clip_norm": 1,
 }
