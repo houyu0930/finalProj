@@ -16,7 +16,7 @@ app._static_folder = './static'
 
 labels = ['Anger', 'Anticipation', 'Disgust', 'Fear', 'Joy', 'Love', 'Optimism', 'Pessimism', 'Sadness', 'Surprise', 'Trust', 'Neutral']
 recommend_id = [1, 4, 2, 3, 4, 4, 4, 3, 5, 6, 4, 4]
-model_path = '/home/houyu/learning/FinalProject/out/model/EmotionClassification_0.5837_2019-05-05_23:38.model'
+model_path = '/home/houyu/learning/FinalProject/out/model/EmotionClassification_0.5900_2019-05-06_00:51.model'
 movie_path = '/home/houyu/learning/FinalProject/database/MovieData.csv'
 music_path = '/home/houyu/learning/FinalProject/database/MusicData.csv'
 model_conf = MODEL_EC
