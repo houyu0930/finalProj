@@ -34,6 +34,8 @@
                         Neutral </br>
                     {% elif item == 'Surprise' %}
                         Surprise </br>
+                    {% elif item == 'NONE' %}
+                        Oops! You input nothing! </br>
                     {% endif %}
                 {% endfor %}
 				</h3>
@@ -87,6 +89,8 @@
                     {% elif movie[0] == '3 Idiots' %}
                         <a href="https://www.imdb.com/title/tt1187043/">3 Idiots</a>(2009) </br>
                         Two friends are searching for their long lost companion. They revisit their college days and recall the memories of their friend who inspired them to think differently, even as the rest of the world called them "idiots". </br>
+                    {% elif movie[0] == 'NONE' %}
+                        Oops! You input nothing! </br>
                     {% endif %}
                 {% endfor %}
 			</strong></p>
@@ -139,9 +143,10 @@
                         <a href="https://music.163.com/#/song?id=26462797">Video Love</a>(Suburban Living) </br>
                     {% elif song[0] == 'You Are The Right One' %}
                         <a href="https://music.163.com/#/song?id=553534022 ">You Are The Right One</a>(Sports) </br>
+                    {% elif song[0] == 'NONE' %}
+                        Oops! You input nothing! </br>
                     {% endif %}
                 {% endfor %}
-            </strong></p>
             </strong></p>
 		</div>
 		<div class="image filtered tinted" data-position="top left">

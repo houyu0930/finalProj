@@ -37,9 +37,9 @@ MODEL_EC = {
     "attention": True,
     "attention_layers": 2,
     "attention_activation": "tanh",
-    "attention_dropout": 0.3,
+    "attention_dropout": 0.2,
     "base": 0.56,
     "patience": 20,
-    "weight_decay": 0.0001,
+    "weight_decay": 0.0,
     "clip_norm": 1,
 }

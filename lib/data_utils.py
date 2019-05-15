@@ -81,8 +81,8 @@ class BaseDataset(Dataset):
             self.max_length = max([len(x) for x in self.data])
         else:
             self.max_length = max_length
-        print('max length (words)')
-        print(self.max_length)
+        # print('max length (words)')
+        # print(self.max_length)
 
     def dataset_statistics(self):
         raise NotImplementedError
@@ -158,6 +158,7 @@ class WordDataset(BaseDataset):
         print("Unique words: {}, Unique unks:{} ({:.2f}%)".format(
             len(words), len(unks), len(unks) * 100 / len(words)))
 
+        '''
         # label statistics
         print("Labels statistics:") # self.labels = y
         label_counts = {"anger":0, "anticipation":0, "disgust":0, "fear":0,
@@ -190,6 +191,7 @@ class WordDataset(BaseDataset):
 
         print(label_counts)
         print(label_percent)
+        '''
 
     def preprocess(self, name, dataset):
         desc = "Pre-processing dataset {}...".format(name)
